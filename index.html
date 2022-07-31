@@ -13,6 +13,7 @@
 </head>
 
 <body>
+   
     <div class="container">
         <div class="row">
             <div class="col-md-6" id="root" style="margin-top:30vh">
@@ -27,9 +28,10 @@
 
         const MainContent = () => {
             const [data, setData] = React.useState()
+            const [loading,setLoading] = React.useState()
             const fetchData = async (event) => {
                 event.preventDefault()
-                setData("Loading...")
+                setLoading(true)
                 const text = {
                     text : event.target.data.value
                 }
@@ -40,6 +42,7 @@
                 })
                 let pred = await res.text()
                 pred = JSON.parse(pred)
+                setLoading(false)
                 setData(pred.prediction)
             }
             return (
@@ -52,7 +55,7 @@
                       <br/>
                       <button type="submit" className="btn btn-outline-dark">Submit</button>
                 </form><br/><br/>
-                <h5 className="text-dark" id="prediction">{data ? "Prediction: " : ""}{data}</h5>
+                <h5 className="text-dark" id="prediction">{data ? "Prediction: "+data : ""}{ loading ? <div class='spinner-border' role='status'></div> : ""}</h5>
                </>
             );
         }
