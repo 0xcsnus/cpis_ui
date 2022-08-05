@@ -1,7 +1,7 @@
 # cpis_ui
 Lambda
 
-npm -i -g serverless
+npm i -g serverless
 
 npm i serverless-offline
 
